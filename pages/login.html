@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng nhập — Sổ Chủ Nhiệm</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/login.css">
+</head>
+<body class="login-body">
+
+  <div class="login-card">
+    <div class="login-logo">📒</div>
+    <h1 class="login-title">Sổ Chủ Nhiệm</h1>
+    <p class="login-subtitle" id="login-class-name">Đang tải...</p>
+
+    <form id="login-form" novalidate>
+      <div class="form-group">
+        <label class="form-label" for="username">Tên đăng nhập</label>
+        <input
+          type="text"
+          id="username"
+          class="form-control"
+          placeholder="Email GV hoặc mã HS (vd: 6301)"
+          autocomplete="username"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="password">Mật khẩu</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          placeholder="Mật khẩu"
+          autocomplete="current-password"
+          required
+        >
+      </div>
+
+      <div id="error-msg" class="error-msg hidden"></div>
+
+      <button type="submit" id="btn-login" class="btn btn-primary w-full">
+        Đăng nhập
+      </button>
+    </form>
+
+    <p class="login-hint">
+      Giáo viên đăng nhập bằng <strong>email</strong>.<br>
+      Học sinh đăng nhập bằng <strong>mã HS</strong> (mật khẩu mặc định = mã HS).
+    </p>
+  </div>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../js/local-db.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/login.js"></script>
+</body>
+</html>

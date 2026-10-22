@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tổng quan – Sổ Chủ Nhiệm</title>
+  <link rel="stylesheet" href="../css/shared.css" />
+  <link rel="stylesheet" href="../css/overview.css" />
+</head>
+<body id="page-overview">
+
+  <main class="page-container">
+
+    <div class="overview-header" style="margin-bottom: 20px;">
+      <h1 class="page-title" id="overview-class-title">Sổ Chủ Nhiệm</h1>
+      <p class="text-muted" id="overview-meta">Đang tải thông tin lớp...</p>
+    </div>
+
+    <!-- ═══════════════ STATS GRID ═══════════════ -->
+    <section class="stats-grid" aria-label="Thống kê tổng quan">
+
+      <div class="stat-card stat-card--students" role="status">
+        <div class="stat-icon" aria-hidden="true">👥</div>
+        <div class="stat-body">
+          <div class="stat-value" id="stat-total"><span class="spinner-inline"></span></div>
+          <div class="stat-label" data-i18n="ovTotalStudents">Tổng học sinh</div>
+        </div>
+      </div>
+
+      <div class="stat-card stat-card--week" role="status">
+        <div class="stat-icon" aria-hidden="true">📅</div>
+        <div class="stat-body">
+          <div class="stat-value" id="stat-week"><span class="spinner-inline"></span></div>
+          <div class="stat-label" data-i18n="ovCurrentWeek">Tuần hiện tại</div>
+        </div>
+      </div>
+
+      <div class="stat-card stat-card--top-group" role="status">
+        <div class="stat-icon" aria-hidden="true">🏆</div>
+        <div class="stat-body">
+          <div class="stat-value" id="stat-top-group"><span class="spinner-inline"></span></div>
+          <div class="stat-label" data-i18n="ovTopGroup">Tổ dẫn đầu</div>
+        </div>
+      </div>
+
+      <div class="stat-card stat-card--today" role="status">
+        <div class="stat-icon" aria-hidden="true">⭐</div>
+        <div class="stat-body">
+          <div class="stat-value" id="stat-today"><span class="spinner-inline"></span></div>
+          <div class="stat-label" data-i18n="ovTodayEmulation">Thi đua hôm nay</div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════ OVERVIEW GRID ═══════════════ -->
+    <section class="overview-grid" aria-label="Bảng xếp hạng và học sinh nổi bật">
+
+      <!-- Left: Group rankings -->
+      <div class="card" id="group-ranking">
+        <div class="card-header">
+          <h2 class="card-title" data-i18n="ovGroupRankings">Bảng xếp hạng các Tổ</h2>
+        </div>
+        <div class="card-body">
+          <table class="ranking-table" id="group-ranking-table" aria-label="Xếp hạng các tổ">
+            <thead>
+              <tr>
+                <th class="col-rank">#</th>
+                <th class="col-name" data-i18n="ovGroupRankTitle">Tổ</th>
+                <th class="col-score" data-i18n="ovScoreAverage">Điểm tổng</th>
+              </tr>
+            </thead>
+            <tbody id="group-ranking-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Right: Top 5 students -->
+      <div class="card" id="top-students">
+        <div class="card-header">
+          <h2 class="card-title" data-i18n="ovTopStudents">Top 5 Học sinh tuần này</h2>
+        </div>
+        <div class="card-body">
+          <ul class="top-student-list" id="top-student-list" aria-label="Top 5 học sinh"></ul>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════ TEACHER ANNOUNCEMENT ═══════════════ -->
+    <section id="announcements-section" aria-label="Thông báo giáo viên">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title" data-i18n="ovTeacherAnnouncement">📢 Nhận xét &amp; Thông báo của Giáo viên</h2>
+        </div>
+        <div class="card-body">
+          <textarea
+            id="announcement-text"
+            class="announcement-textarea"
+            rows="4"
+            data-i18n-placeholder="ovAnnouncementPlaceholder"
+            placeholder="Nhập thông báo gửi đến phụ huynh hoặc cả lớp..."
+            aria-label="Nội dung thông báo"
+          ></textarea>
+          <div class="announcement-actions teacher-only" style="margin-top:10px">
+            <button id="save-announcement-btn" class="btn btn-primary" data-i18n="ovSaveAnnouncement">💾 Lưu thông báo</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Toast container -->
+  <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../js/local-db.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/student-picker.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/overview.js"></script>
+</body>
+</html>

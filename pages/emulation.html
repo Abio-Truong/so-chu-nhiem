@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thi đua — Sổ Chủ Nhiệm</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/emulation.css">
+</head>
+<body>
+
+  <main class="page-container">
+
+    <!-- Page header + week nav -->
+    <div class="page-header">
+      <h1 class="page-title" data-i18n="emPageTitle">Thi đua &amp; Xếp hạng</h1>
+    </div>
+
+    <div class="emulation-toolbar card">
+      <!-- Week navigation -->
+      <div class="week-nav">
+        <button class="btn btn-icon" id="btn-prev-week" data-i18n-title="emWeekPrev">‹</button>
+        <span class="week-display" id="week-display">Tuần 1</span>
+        <button class="btn btn-icon" id="btn-next-week" data-i18n-title="emWeekNext">›</button>
+      </div>
+      <!-- Student picker (1) — multi-select, default all -->
+      <div class="picker-area">
+        <label class="form-label" data-i18n="emFilterStudent">Lọc học sinh:</label>
+        <div id="picker-container"></div>
+      </div>
+      <!-- Teacher actions -->
+      <div class="teacher-only emulation-actions">
+        <button class="btn btn-primary" id="btn-add-score" data-i18n="emAddScore">+ Ghi nhận điểm</button>
+      </div>
+    </div>
+
+    <!-- Group score cards -->
+    <div class="group-scores-grid" id="group-scores-grid">
+      <!-- Rendered by JS -->
+    </div>
+
+    <!-- Ranking accordion -->
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-header flex-between" style="cursor:pointer" id="ranking-header">
+        <h2 class="card-title" style="margin:0" data-i18n="emPersonalRanking">📊 Xếp hạng cá nhân (*)</h2>
+        <span id="ranking-toggle">▼</span>
+      </div>
+      <div id="ranking-body">
+        <div id="ranking-list"></div>
+      </div>
+    </div>
+
+    <!-- Score history accordion -->
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-header flex-between" style="cursor:pointer" id="history-header">
+        <h2 class="card-title" style="margin:0" data-i18n="emHistoryTitle">📋 Lịch sử ghi nhận điểm (*)</h2>
+        <span id="history-toggle">▼</span>
+      </div>
+      <div id="history-body">
+        <div id="history-list"></div>
+      </div>
+    </div>
+
+    <!-- Criteria management (teacher only) -->
+    <div class="card teacher-only" id="criteria-card">
+      <h2 class="card-title" data-i18n="emCriteriaTitle">⚙️ Cài đặt tiêu chí con</h2>
+      <div id="criteria-list"></div>
+      <button class="btn btn-secondary mt-2" id="btn-add-criteria" data-i18n="emBtnAddCriteria">+ Thêm tiêu chí</button>
+    </div>
+
+  </main>
+
+  <div id="toast-container" aria-live="polite"></div>
+
+  <!-- Modal: Add score entry -->
+  <div class="modal-overlay hidden" id="modal-overlay">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <h3 data-i18n="emModalScoreTitle">Ghi nhận điểm thi đua</h3>
+        <button class="btn-icon" id="modal-close">&times;</button>
+      </div>
+      <div id="modal-picker-container" style="margin-bottom:16px"></div>
+      <div class="form-group">
+        <label class="form-label" data-i18n="emFormCategory">Nhóm tiêu chí</label>
+        <select id="form-nhom-tieu-chi" class="form-control">
+          <option value="" data-i18n="emAllCategories">-- Tất cả các nhóm --</option>
+          <option value="1. Giờ giấc - chuyên cần" data-i18n="cat1">1. Giờ giấc - chuyên cần</option>
+          <option value="2. Nội quy - trật tự" data-i18n="cat2">2. Nội quy - trật tự</option>
+          <option value="3. Vệ sinh" data-i18n="cat3">3. Vệ sinh</option>
+          <option value="4. Tác phong - trang phục" data-i18n="cat4">4. Tác phong - trang phục</option>
+          <option value="5. Trách nhiệm - ứng xử" data-i18n="cat5">5. Trách nhiệm - ứng xử</option>
+          <option value="6. Học tập" data-i18n="cat6">6. Học tập</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-i18n="emFormCriteria">Tiêu chí</label>
+        <select id="form-tieu-chi" class="form-control">
+          <option value="" data-i18n="emCriteriaSelectDefault">-- Chọn tiêu chí hoặc nhập số điểm trực tiếp --</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group" style="flex:1">
+          <label class="form-label" data-i18n="emFormPoints">Điểm (–5 đến +5)</label>
+          <input type="number" id="form-diem" class="form-control" min="-5" max="5" step="1" value="1">
+        </div>
+        <div class="form-group" style="flex:2">
+          <label class="form-label" data-i18n="emFormReason">Lý do / Ghi chú</label>
+          <input type="text" id="form-ly-do" class="form-control" placeholder="Tuỳ chọn">
+        </div>
+      </div>
+      <div id="modal-error" class="error-msg hidden"></div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btn-modal-cancel" data-i18n="stBtnCancel">Huỷ</button>
+        <button class="btn btn-primary" id="btn-modal-save" data-i18n="emSaveScoreBtn">Lưu điểm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add Criteria -->
+  <div class="modal-overlay hidden" id="modal-criteria-overlay">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <h3 data-i18n="emModalCriteriaTitle">Thêm tiêu chí thi đua mới</h3>
+        <button class="btn-icon" id="modal-criteria-close">&times;</button>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-i18n="emCriteriaCategoryLabel">Nhóm tiêu chí (1 trong 6 nhóm cố định) *</label>
+        <select id="criteria-form-nhom" class="form-control">
+          <option value="1. Giờ giấc - chuyên cần" data-i18n="cat1">1. Giờ giấc - chuyên cần</option>
+          <option value="2. Nội quy - trật tự" data-i18n="cat2">2. Nội quy - trật tự</option>
+          <option value="3. Vệ sinh" data-i18n="cat3">3. Vệ sinh</option>
+          <option value="4. Tác phong - trang phục" data-i18n="cat4">4. Tác phong - trang phục</option>
+          <option value="5. Trách nhiệm - ứng xử" data-i18n="cat5">5. Trách nhiệm - ứng xử</option>
+          <option value="6. Học tập" data-i18n="cat6">6. Học tập</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-i18n="emCriteriaNameLabel">Tên tiêu chí *</label>
+        <input type="text" id="criteria-form-ten" class="form-control" placeholder="VD: Đi học đúng giờ, Tích cực phát biểu...">
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-i18n="emCriteriaPointsLabel">Điểm mặc định (từ -5 đến +5) *</label>
+        <input type="number" id="criteria-form-diem" class="form-control" min="-5" max="5" step="1" value="1">
+      </div>
+      <div id="criteria-error" class="error-msg hidden"></div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btn-criteria-cancel" data-i18n="stBtnCancel">Huỷ</button>
+        <button class="btn btn-primary" id="btn-criteria-save" data-i18n="emBtnAddCriteria">Thêm tiêu chí</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../js/local-db.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/student-picker.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/emulation.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cài đặt — Sổ Chủ Nhiệm</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/settings.css">
+</head>
+<body>
+
+  <main class="page-container">
+    <h1 class="page-title" data-i18n="setPageTitle" style="margin-bottom:24px">Cài đặt hệ thống</h1>
+
+    <!-- Student access denied notice -->
+    <div id="student-notice" class="card student-notice hidden" data-i18n="setStudentNotice">
+      🔒 Chỉ giáo viên mới có quyền thay đổi các cài đặt trên trang này.
+    </div>
+
+    <!-- Class info card -->
+    <div class="card settings-card teacher-content" id="class-info-card">
+      <h2 class="card-title" data-i18n="setClassInfo">📚 Thông tin lớp &amp; Giáo viên chủ nhiệm</h2>
+      <div class="form-row">
+        <div class="form-group" style="flex:1">
+          <label class="form-label" data-i18n="setClassName">Tên lớp *</label>
+          <input type="text" id="setting-ten-lop" class="form-control" placeholder="VD: 6/3">
+        </div>
+        <div class="form-group" style="flex:1">
+          <label class="form-label" data-i18n="setSchoolYear">Niên khóa *</label>
+          <input type="text" id="setting-nam-hoc" class="form-control" placeholder="VD: 2026-2027">
+        </div>
+        <div class="form-group" style="flex:1">
+          <label class="form-label" data-i18n="setTeacherName">Giáo viên chủ nhiệm (GVCN) *</label>
+          <input type="text" id="setting-gvcn" class="form-control" placeholder="VD: Cô Nguyễn Thị Mai">
+        </div>
+      </div>
+      <button class="btn btn-primary" id="btn-save-class" data-i18n="setBtnSaveClass">💾 Lưu thông tin lớp</button>
+    </div>
+
+    <!-- Emulation settings -->
+    <div class="card settings-card teacher-content">
+      <h2 class="card-title" data-i18n="setEmulationHeader">🏆 Cài đặt thi đua</h2>
+      <div class="setting-row">
+        <div class="setting-info">
+          <div class="setting-label" data-i18n="setPrivacyTitle">Chế độ riêng tư</div>
+          <div class="setting-desc" data-i18n="setPrivacyDesc">Bật: học sinh chỉ xem được lịch sử điểm của mình; Tắt: công khai toàn bộ</div>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggle-privacy">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Restore Default Data Card -->
+    <div class="card settings-card teacher-content">
+      <h2 class="card-title" data-i18n="setSecurityTitle">🔐 Khôi phục &amp; Dữ liệu</h2>
+      <div class="setting-row">
+        <div class="setting-info">
+          <div class="setting-label" data-i18n="setResetTitle">Khôi phục dữ liệu mẫu gốc (Reset Default)</div>
+          <div class="setting-desc" data-i18n="setResetDesc">
+            Đưa toàn bộ danh sách 24 học sinh, điểm thi đua và sơ đồ chỗ ngồi về trạng thái mẫu ban đầu.
+          </div>
+        </div>
+        <button class="btn btn-danger" id="btn-reset-default" data-i18n="setBtnReset">
+          🔄 Khôi phục dữ liệu gốc
+        </button>
+      </div>
+    </div>
+
+    <!-- System info -->
+    <div class="card settings-card teacher-content">
+      <h2 class="card-title" data-i18n="setSysInfoTitle">ℹ️ Thông tin hệ thống</h2>
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-label" data-i18n="setVersion">Phiên bản</span>
+          <span class="info-value">v2.0</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label" data-i18n="setMode">Chế độ hoạt động</span>
+          <span class="info-value ok" data-i18n="setModeValue">Standalone Prototype (Dữ liệu nhúng sẵn)</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Ngôn ngữ hiện tại / Current Language</span>
+          <span class="info-value" id="current-lang-display">Tiếng Việt (VI)</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <div id="toast-container" aria-live="polite"></div>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../js/local-db.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/student-picker.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/settings.js"></script>
+</body>
+</html>

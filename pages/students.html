@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Học sinh — Sổ Chủ Nhiệm</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/students.css">
+</head>
+<body>
+
+  <main class="page-container">
+
+    <!-- Page header -->
+    <div class="page-header">
+      <h1 class="page-title" data-i18n="stPageTitle">Học sinh &amp; Hồ sơ</h1>
+      <div class="page-header-actions teacher-only">
+        <button class="btn btn-primary" id="btn-add-student" data-i18n="stAddStudent">+ Thêm học sinh</button>
+        <button class="btn btn-secondary" id="btn-import-excel" data-i18n="stImportFile">📁 Nhập từ file</button>
+        <input type="file" id="file-import-excel" accept=".xlsx,.xls,.csv" style="display:none">
+        <button class="btn btn-secondary" id="btn-export-excel" data-i18n="stExportExcel">📥 Xuất Excel</button>
+      </div>
+    </div>
+
+    <!-- Toolbar: search + filter -->
+    <div class="card students-toolbar">
+      <div style="flex: 1; min-width: 260px;">
+        <input type="text" id="search-input" class="form-control"
+               data-i18n-placeholder="stSearchPlaceholder"
+               placeholder="Tìm theo Họ tên, Mã HS, Tổ (chuyển lên đầu danh sách)...">
+      </div>
+      <div class="group-filter">
+        <span class="filter-label" data-i18n="stFilterGroup">Lọc theo Tổ:</span>
+        <button class="btn btn-sm filter-btn active" data-group="all" data-i18n="stAllGroups">Tất cả</button>
+        <button class="btn btn-sm filter-btn" data-group="1">Tổ 1</button>
+        <button class="btn btn-sm filter-btn" data-group="2">Tổ 2</button>
+        <button class="btn btn-sm filter-btn" data-group="3">Tổ 3</button>
+        <button class="btn btn-sm filter-btn" data-group="4">Tổ 4</button>
+      </div>
+    </div>
+
+    <!-- Students table -->
+    <div class="card">
+      <div class="table-container" id="students-table-wrapper">
+        <table class="table" id="students-table">
+          <thead>
+            <tr>
+              <th data-i18n="stColMaHs">Mã HS</th>
+              <th data-i18n="stColHoTen">Họ tên</th>
+              <th data-i18n="stColGioiTinh">Giới tính</th>
+              <th data-i18n="stColTo">Tổ</th>
+              <th data-i18n="stColDiem">Thi đua</th>
+              <th data-i18n="stColMuc">Mức</th>
+              <th class="teacher-only" data-i18n="stColAction">Sửa</th>
+            </tr>
+          </thead>
+          <tbody id="students-tbody"></tbody>
+        </table>
+      </div>
+      <p id="students-empty" class="text-muted text-center" data-i18n="stEmptyList" hidden>Không có học sinh nào.</p>
+    </div>
+
+  </main>
+
+  <!-- Toast container -->
+  <div id="toast-container" aria-live="polite"></div>
+
+  <!-- Modal: Add / Edit student -->
+  <div class="modal-overlay hidden" id="modal-overlay">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-header">
+        <h3 id="modal-title">Thêm học sinh mới</h3>
+        <button class="btn-icon" id="modal-close" aria-label="Đóng">&times;</button>
+      </div>
+      <form id="student-form" novalidate>
+        <input type="hidden" id="form-student-id">
+        <div class="form-row">
+          <div class="form-group" style="flex:1">
+            <label class="form-label" data-i18n="stFormMaHs">Mã HS *</label>
+            <input type="text" id="form-ma-hs" class="form-control" required placeholder="VD: 6301">
+          </div>
+          <div class="form-group" style="flex:2">
+            <label class="form-label" data-i18n="stFormHoTen">Họ và tên *</label>
+            <input type="text" id="form-ho-ten" class="form-control" required placeholder="Nguyễn Văn A">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group" style="flex:1">
+            <label class="form-label" data-i18n="stFormGioiTinh">Giới tính</label>
+            <select id="form-gioi-tinh" class="form-control">
+              <option value="Nam">Nam</option>
+              <option value="Nữ">Nữ</option>
+            </select>
+          </div>
+          <div class="form-group" style="flex:1">
+            <label class="form-label" data-i18n="stFormTo">Tổ</label>
+            <select id="form-to-so" class="form-control">
+              <option value="1">Tổ 1</option>
+              <option value="2">Tổ 2</option>
+              <option value="3">Tổ 3</option>
+              <option value="4">Tổ 4</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-i18n="stFormNgaySinh">Ngày sinh</label>
+          <input type="date" id="form-ngay-sinh" class="form-control">
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-i18n="stFormGhiChu">Ghi chú</label>
+          <input type="text" id="form-ghi-chu" class="form-control" placeholder="Tuỳ chọn">
+        </div>
+        <div id="form-error" class="error-msg hidden"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="btn-modal-cancel" data-i18n="stBtnCancel">Huỷ</button>
+          <button type="submit" class="btn btn-primary" id="btn-modal-save" data-i18n="stBtnSave">Lưu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+  <script src="../js/i18n.js"></script>
+  <script src="../js/local-db.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/student-picker.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/students.js"></script>
+</body>
+</html>
