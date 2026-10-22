@@ -1,6 +1,6 @@
-# 📒 Sổ Chủ Nhiệm — Classroom Management Log
+# 📒 Sổ Chủ Nhiệm — Class Management Log
 
-> A modern, responsive web application for homeroom teachers and students.  
+> A modern, responsive web application for homeroom teachers and students.
 > **Standalone Prototype** with pre-loaded embedded data, real-time **English 🇬🇧 / Tiếng Việt 🇻🇳** bilingual support, and an instant **Teacher / Student** role switcher.
 
 ---
@@ -33,7 +33,7 @@
 ## 📁 Project Structure / Cấu Trúc Thư Mục
 
 ```
-my-first-project/
+class-management-project/
 ├── index.html              # Entry point (auto-redirects to pages/overview.html)
 ├── pages/
 │   ├── overview.html       # Page 1: Overview Dashboard
