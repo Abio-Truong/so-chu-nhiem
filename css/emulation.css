@@ -1,0 +1,149 @@
+/* ── Emulation page styles ────────────────────────────────── */
+
+.emulation-toolbar {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+}
+
+/* ── Week navigation ──────────────────────────────────────── */
+.week-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.week-display {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary);
+  min-width: 80px;
+  text-align: center;
+}
+
+/* ── Group score cards ────────────────────────────────────── */
+.group-scores-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+  .group-scores-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.group-score-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  text-align: center;
+  border-top: 4px solid var(--border);
+}
+
+.group-score-card.to-1 { border-top-color: #3b82f6; }
+.group-score-card.to-2 { border-top-color: #10b981; }
+.group-score-card.to-3 { border-top-color: #f59e0b; }
+.group-score-card.to-4 { border-top-color: #8b5cf6; }
+
+.group-score-name  { font-size: 13px; font-weight: 600; color: var(--text-muted); }
+.group-score-value { font-size: 32px; font-weight: 700; color: var(--text); }
+.group-score-rank  { font-size: 18px; margin-top: 4px; }
+
+/* ── Ranking list ─────────────────────────────────────────── */
+#ranking-list, #history-list {
+  padding-top: 12px;
+}
+
+.ranking-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.ranking-item:last-child { border-bottom: none; }
+.ranking-item.highlighted { background: var(--primary-light); border-radius: var(--radius); padding: 10px 8px; }
+
+.rank-num {
+  width: 32px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.rank-info { flex: 1; }
+.rank-name { font-weight: 500; font-size: 14px; }
+.rank-meta { font-size: 12px; color: var(--text-muted); }
+.rank-score { font-weight: 700; font-size: 20px; }
+
+/* ── Score history ────────────────────────────────────────── */
+.history-entry {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.history-entry:last-child { border-bottom: none; }
+
+.score-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 28px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 0 8px;
+  flex-shrink: 0;
+}
+
+.score-badge.positive { background: #d1fae5; color: #065f46; }
+.score-badge.negative { background: #fee2e2; color: #991b1b; }
+
+.history-info { flex: 1; }
+.history-student { font-weight: 500; font-size: 14px; }
+.history-reason  { font-size: 12px; color: var(--text-muted); }
+.history-time    { font-size: 11px; color: #94a3b8; white-space: nowrap; }
+
+/* ── Criteria list ────────────────────────────────────────── */
+.criteria-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.criteria-item:last-child { border-bottom: none; }
+.criteria-name { flex: 1; font-size: 14px; }
+.criteria-diem { min-width: 40px; text-align: right; font-weight: 600; }
+
+/* ── Accordion toggle ─────────────────────────────────────── */
+.card-header.flex-between { padding-bottom: 12px; }
+#ranking-header:hover, #history-header:hover { opacity: 0.85; }
+
+/* ── Picker area ──────────────────────────────────────────── */
+.picker-area { flex: 1; min-width: 240px; }
+.emulation-actions { display: flex; gap: 8px; align-items: flex-end; }
+
+/* ── Modal ────────────────────────────────────────────────── */
+.error-msg {
+  background: #fef2f2; border: 1px solid #fecaca;
+  color: var(--danger); border-radius: var(--radius);
+  padding: 10px 14px; font-size: 14px; margin-bottom: 12px;
+}
+
+.page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+.page-title  { font-size: 22px; font-weight: 700; margin: 0; }
