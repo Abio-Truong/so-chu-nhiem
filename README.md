@@ -50,17 +50,17 @@ my-first-project/
 │   ├── emulation.css
 │   └── settings.css
 ├── js/
-│   ├── i18n.js             # Bilingual EN/VI Dictionary & translation helpers
-│   ├── local-db.js         # Embedded seed data & LocalStorage engine
-│   ├── auth.js             # Client-side Role & Identity Manager
-│   ├── nav.js              # Navbar with Role & Language Switchers
-│   ├── student-picker.js   # Reusable student search & autocomplete component (1)
-│   ├── overview.js
-│   ├── students.js
-│   ├── seating.js
-│   ├── emulation.js
-│   ├── settings.js
-│   └── login.js
+    ├── i18n.js             # Bilingual EN/VI Dictionary & translation helpers
+    ├── local-db.js         # Embedded seed data & LocalStorage engine
+    ├── auth.js             # Client-side Role & Identity Manager
+    ├── nav.js              # Navbar with Role & Language Switchers
+    ├── student-picker.js   # Reusable student search & autocomplete component (1)
+    ├── overview.js
+    ├── students.js
+    ├── seating.js
+    ├── emulation.js
+    ├── settings.js
+    └── login.js
 
 ```
 
